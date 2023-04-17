@@ -24,7 +24,7 @@ namespace csharp_gestore_eventi
             set
             {
                 if (string.IsNullOrEmpty(value))
-                    throw new ArgumentNullException("Il titolo non può essere vuoto!");
+                    throw new Exception("Il titolo non può essere vuoto!");
 
                     titolo = value;
             }
@@ -39,7 +39,7 @@ namespace csharp_gestore_eventi
             set
             {
                 if (value < DateTime.Now)
-                    throw new InvalidDataException("La data deve essere nel futuro!");
+                    throw new Exception("La data deve essere nel futuro!");
 
                     data = value;
             }
@@ -70,28 +70,27 @@ namespace csharp_gestore_eventi
 
         public void PrenotaPosti(int numPosti)
         {
-                if (Data < DateTime.Now)
-                    throw new Exception("Evento già passato!");
+            if (Data < DateTime.Now) throw new Exception("Evento già passato!");
 
-                if ((CapienzaMax - postiPrenotati) == 0)
-                    throw new Exception("Questo evento non ha più posti disponibili!");
 
-                if (numPosti > (CapienzaMax - postiPrenotati))
-                    throw new Exception("Non ci sono abbastanza posti!");
+            if ((CapienzaMax - postiPrenotati) == 0) throw new Exception("Questo evento non ha più posti disponibili!");
 
-                postiPrenotati += numPosti;
+
+            if (numPosti > (CapienzaMax - postiPrenotati)) throw new Exception("Non ci sono abbastanza posti!");
+
+            postiPrenotati += numPosti;
         }
 
         public void DisdiciPosti(int numPosti)
         {
-            if (Data < DateTime.Now)
-                throw new Exception("Evento già passato!");
+            if (Data < DateTime.Now) throw new Exception("Evento già passato!");
 
-            if ((CapienzaMax - postiPrenotati) == 0)
-                throw new Exception("Questo evento non ha nessuna prenotazione!");
 
-            if (numPosti > (CapienzaMax - postiPrenotati))
-                throw new Exception("Non ci sono abbastanza posti da disdire!");
+            if ((CapienzaMax - postiPrenotati) == 0) throw new Exception("Questo evento non ha nessuna prenotazione!");
+
+
+            if (numPosti > (CapienzaMax - postiPrenotati)) throw new Exception("Non ci sono abbastanza posti da disdire!");
+
 
             postiPrenotati -= numPosti;
 
