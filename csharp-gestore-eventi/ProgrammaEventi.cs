@@ -35,7 +35,8 @@ namespace csharp_gestore_eventi
 
             foreach(Evento evento in eventi)
             {
-                listaStringa.AppendLine($"Titolo: {evento.Titolo}, Data: {evento.Data}, Posti Prenotati: {evento.PostiPrenotati}/{evento.CapienzaMax}");
+                listaStringa.AppendLine($"Titolo: {evento.Titolo}, Data: {evento.Data.ToString("d")}, Posti Prenotati: {evento.PostiPrenotati}/{evento.CapienzaMax}");
+                Console.WriteLine(evento.Titolo);
             }
 
             return listaStringa.ToString();
@@ -43,7 +44,7 @@ namespace csharp_gestore_eventi
 
         public int CounterEventi(List <Evento> eventi)
         {
-            return eventi.Count;
+            return (int)eventi.Count;
         }
 
         public void SvuotaListaEventi(List <Evento> eventi)
@@ -57,8 +58,10 @@ namespace csharp_gestore_eventi
 
             foreach(Evento evento in eventi)
             {
-                titoloProgramma.AppendLine($"{evento.Data} - {evento.Titolo}\n")
+                titoloProgramma.AppendLine($"{evento.Data.ToString("d")} - {evento.Titolo}\n");
             }
+
+            return titoloProgramma.ToString();
         }
     }
 }
